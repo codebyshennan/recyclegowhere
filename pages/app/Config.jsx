@@ -1,18 +1,18 @@
 import { Box } from '@chakra-ui/react'
 import React from 'react'
-import Config from '../../components/Config'
+import Configurations from '../../components/Configurations'
 import Layout from '../../components/Layout'
 
-const config = () => {
+const Config = () => {
   return (
     <Box>
-      <Config />
+      <Configurations />
     </Box>
   )
 }
 
-config.getLayout = function getLayout(page) {
+Config.getLayout = function getLayout(page) {
   return <Layout>{page}</Layout>
 }
 
-export default config
+export default Config

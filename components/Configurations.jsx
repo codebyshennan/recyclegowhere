@@ -27,7 +27,7 @@ export const notifications = [
   },
 ]
 
-const Config = () => (
+const Configurations = () => (
   <Box as='section' py={{ base: '4', md: '8' }}>
     <Container maxW='3xl'>
       <Box

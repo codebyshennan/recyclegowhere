@@ -1,5 +1,5 @@
 import { chakra } from '@chakra-ui/react'
-import * as React from 'react'
+import React from 'react'
 
 export const PayPalLogo = (props) => (
   <chakra.svg
