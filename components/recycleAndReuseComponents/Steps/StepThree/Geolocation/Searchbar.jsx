@@ -1,28 +1,18 @@
-import { GeoSearchControl, OpenStreetMapProvider } from "leaflet-geosearch";
-import { MapControl, withLeaflet } from "react-leaflet";
+import { GeoSearchControl } from 'leaflet-geosearch'
+import { useEffect } from 'react'
 
-class SearchBox extends MapControl {
-	constructor(props) {
-		super(props);
-		props.leaflet.map.on("geosearch/showlocation", (e) =>
-			props.updateMarker(e),
-		);
-	}
+const SearchBar = (props) => {
+  const { map, ...rest } = props
+  useEffect(() => {
+    const searchControl = new GeoSearchControl({
+      provider: props.provider,
+      ...rest,
+    })
+    map.addControl(searchcontrol)
+    return () => map.removeControl(searchControl)
+  }, [props, map, rest])
 
-	createLeafletElement() {
-		const searchEl = GeoSearchControl({
-			provider: new OpenStreetMapProvider(),
-			style: "bar",
-			showMarker: true,
-			showPopup: false,
-			autoClose: true,
-			retainZoomLevel: false,
-			animateZoom: true,
-			keepResult: false,
-			searchLabel: "search",
-		});
-		return searchEl;
-	}
+  return null
 }
 
-export const SearchBar = withLeaflet(SearchBox);
+export default SearchBar
