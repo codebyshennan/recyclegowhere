@@ -16,7 +16,6 @@ import {
 import React from 'react'
 import { FiEdit2, FiTrash2 } from 'react-icons/fi'
 import { IoArrowDown } from 'react-icons/io5'
-import { Rating } from './Rating'
 import { members } from './_data'
 
 const MemberTable = (props) => (
@@ -50,21 +49,18 @@ const MemberTable = (props) => (
               </Box>
             </HStack>
           </Td>
-          <Td textAlign="center">
-            <Badge
-              size='sm'
-              colorScheme={'green'}
-            >
+          <Td textAlign='center'>
+            <Badge size='sm' colorScheme={'green'}>
               {member.status}
             </Badge>
           </Td>
-          <Td textAlign="center">
+          <Td textAlign='center'>
             <Text color='muted'>{member.email}</Text>
           </Td>
-          <Td textAlign="center">
+          <Td textAlign='center'>
             <Text color='muted'>{member.role}</Text>
           </Td>
-          <Td textAlign="center">
+          <Td textAlign='center'>
             <Text color='muted'>{member.rating}</Text>
           </Td>
         </Tr>

@@ -13,6 +13,26 @@ const nextConfig = {
         destination: '/app/stats',
         permanent: true,
       },
+      {
+        source: '/gov',
+        destination: '/gov/db',
+        permanent: true,
+      },
+      {
+        source: '/fmcg',
+        destination: '/fmcg/reports',
+        permanent: true,
+      },
+      {
+        source: '/grab',
+        destination: '/grab/health',
+        permanent: true,
+      },
+      {
+        source: '/partner',
+        destination: '/partner/stats',
+        permanent: true,
+      },
     ]
   },
 }

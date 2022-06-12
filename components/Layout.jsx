@@ -25,6 +25,7 @@ import {
 } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { FiHelpCircle, FiMenu, FiSettings } from 'react-icons/fi'
+import { GrLogout } from 'react-icons/gr'
 import { useRouter } from 'next/router'
 import { useCookies } from 'react-cookie'
 import { LINKS } from '../utils/links'
@@ -120,6 +121,7 @@ const Layout = ({ children }) => {
                   </Avatar>
                 </HStack>
               ) : (
+                // mobile app drawer
                 <>
                   <IconButton
                     variant='ghost'
@@ -155,6 +157,55 @@ const Layout = ({ children }) => {
                               </Stack>
                             </Link>
                           ))}
+                          <Link
+                            variant='menu'
+                            href={`${basePath}/config`}
+                            key={'config'}
+                          >
+                            <Stack spacing='4' direction='row' p='3'>
+                              <Icon
+                                as={FiSettings}
+                                boxSize='6'
+                                color='accent'
+                              />
+                              <Stack spacing='1'>
+                                <Text fontWeight='medium'>Settings</Text>
+                                <Text fontSize='sm' color='muted'>
+                                  {/* {link.description} */}
+                                </Text>
+                              </Stack>
+                            </Stack>
+                          </Link>
+                          <Link
+                            variant='menu'
+                            href={`${basePath}/help`}
+                            key={'help'}
+                          >
+                            <Stack spacing='4' direction='row' p='3'>
+                              <Icon
+                                as={FiHelpCircle}
+                                boxSize='6'
+                                color='accent'
+                              />
+                              <Stack spacing='1'>
+                                <Text fontWeight='medium'>Help</Text>
+                                <Text fontSize='sm' color='muted'>
+                                  {/* {link.description} */}
+                                </Text>
+                              </Stack>
+                            </Stack>
+                          </Link>
+                          <Link variant='menu' href={`/login`} key={'logout'}>
+                            <Stack spacing='4' direction='row' p='3'>
+                              <Icon as={GrLogout} boxSize='6' color='accent' />
+                              <Stack spacing='1'>
+                                <Text fontWeight='medium'>Log Out</Text>
+                                <Text fontSize='sm' color='muted'>
+                                  {/* {link.description} */}
+                                </Text>
+                              </Stack>
+                            </Stack>
+                          </Link>
                         </List>
                       </DrawerBody>
                     </DrawerContent>

@@ -1,5 +1,6 @@
-import { Box, Container, Divider, Stack, Text } from '@chakra-ui/react'
+import { Box, Container, Divider, Image, Stack, Text } from '@chakra-ui/react'
 import React from 'react'
+import { QnA } from './QnA'
 
 const HelpPage = () => (
   <Box
@@ -10,13 +11,20 @@ const HelpPage = () => (
   >
     <Container>
       <Stack spacing='5'>
-        <Text fontSize='lg' fontWeight='medium'>
-          Member overview
-        </Text>
+        <Image src='/recyclegowhere.png' alt='Logo' />
+        {QnA.map((obj) => {
+          return (
+            <>
+              <Text fontSize='lg' fontWeight='medium'>
+                {obj.q}
+              </Text>
 
-        <Text fontSize='xs'>some lorem</Text>
+              <Text fontSize='xs'>{obj.a}</Text>
 
-        <Divider />
+              <Divider />
+            </>
+          )
+        })}
       </Stack>
     </Container>
   </Box>
