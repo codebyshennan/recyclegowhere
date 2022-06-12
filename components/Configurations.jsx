@@ -62,4 +62,4 @@ const Configurations = () => (
   </Box>
 )
 
-export default Config
+export default Configurations
