@@ -14,11 +14,14 @@ import {useState} from 'react';
 import { HiOutlineChat, HiOutlineMail, HiOutlinePhone } from "react-icons/hi";
 import { products } from "./_data";
 import { ProductItem } from "./ProductItem";
+import { AlertDialogExample } from "./AlertDialogExample";
 
 export const OrderSummary = () => {
   const [alert, setAlert] = useState(false);
   const onClickHandler = () => {
     setAlert(true);
+    console.log("sup")
+    console.log(alert);
   }
   return (
     <Stack spacing={{ base: "6", md: "10" }}>
@@ -98,6 +101,7 @@ export const OrderSummary = () => {
         <Button colorScheme="teal" size="lg" py="7" onClick={onClickHandler}>
           Place Order
         </Button>
+        { alert && (<AlertDialogExample />)}
         <Stack spacing="3">
           <Text fontSize="sm" color={useColorModeValue("gray.700", "gray.200")}>
             Have questions? or Need help to complete your order?

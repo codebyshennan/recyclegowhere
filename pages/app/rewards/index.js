@@ -12,7 +12,7 @@ import { Card } from '../../../components/rewards/Card'
 
 const Rewards = () => {
   return (
-    <Box as='section' pt='20' pb='12' position='relative' width='100%'>
+    <Box as='section' pb='12' position='relative' width='100%'>
       <Box position='absolute' inset='0' height='32' />
       <Box
         maxW='7xl'

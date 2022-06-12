@@ -39,7 +39,6 @@ const Stats = () => {
         spacing='4'
         direction={{ base: 'column', lg: 'row' }}
         justify='space-between'
-        mt={10}
       ></Stack>
       <Stack spacing={{ base: '5', lg: '6' }}>
         <SimpleGrid columns={{ base: 1, md: 3 }} mx='20' gap='6'>

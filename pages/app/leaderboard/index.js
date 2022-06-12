@@ -5,7 +5,7 @@ import DataTable from '../../../components/leaderboard/DataTable'
 
 const Leaderboard = () => {
   return (
-    <Box mt={10}>
+    <Box>
       <DataTable />
     </Box>
   )
