@@ -36,6 +36,7 @@ const ArrangeApp = ({ data }) => {
     <Center>
       <Head title='Reuse and Recycle' />
       <Box w={['70vw', '60vw', '40wv']} pl={25}>
+        {console.log(data)}
         <Flex flexDir='column' width='100%'>
           <Steps
             activeStep={step}

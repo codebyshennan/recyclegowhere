@@ -1,63 +1,61 @@
-import React, { useState } from 'react'
-import { ArrowForwardIcon, SearchIcon } from '@chakra-ui/icons'
-import Link from 'next/link'
-import { Button } from '@chakra-ui/react'
-import { useMapEvents } from 'react-leaflet'
+import React, { useState } from "react";
+import { ArrowForwardIcon, SearchIcon } from "@chakra-ui/icons";
+import Link from "next/link";
+import { Button } from "@chakra-ui/react";
+import { useMapEvents } from "react-leaflet";
 
 const UtilityBar = ({ encode, disable, setDisable, loading, setLoading }) => {
   const map = useMapEvents({
     locationfound(e) {
-      map.flyTo(e.latlng)
-      setLoading(false)
-      setDisable(false)
+      map.flyTo(e.latlng);
+      setLoading(false);
+      setDisable(false);
     },
-  })
+  });
 
   const onUseMylocation = () => {
-    setLoading(true)
-    map.locate()
-  }
+    setLoading(true);
+    map.locate();
+  };
 
   return (
     <div
       style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
         marginTop: 5,
       }}
     >
       <Button
         onClick={onUseMylocation}
         marginRight={2}
-        colorScheme='teal'
+        colorScheme="teal"
         isLoading={loading}
-        loadingText='Submitting'
+        loadingText="Submitting"
       >
-        <SearchIcon />{' '}
-        <span style={{ fontSize: '0.9rem' }}>Use My Location! </span>
+        <SearchIcon />{" "}
+        <span style={{ fontSize: "0.9rem" }}>Use My Location! </span>
       </Button>
       <Link
         href={{
-          pathname: '/summary/[code]',
+          pathname: "/app/arrange/checkout",
           query: {
             code: encode.current,
-          },
+          }, // the data
         }}
-        as={`/summary/${encode.current}`}
-        passHref
       >
         <Button
           disabled={disable}
           rightIcon={<ArrowForwardIcon />}
           onClick={() => setLoading(false)}
-          colorScheme='teal'
+          colorScheme="teal"
         >
-          <span style={{ fontSize: '0.9rem' }}>I&apos;m done!</span>
+          <span style={{ fontSize: "0.9rem" }}>I&apos;m done!</span>
         </Button>
       </Link>
     </div>
-  )
-}
+  );
+};
 
-export default UtilityBar
+export default UtilityBar;
