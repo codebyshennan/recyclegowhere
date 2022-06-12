@@ -4,8 +4,9 @@ import Link from "next/link";
 import { Button } from "@chakra-ui/react";
 import { useMapEvents } from "react-leaflet";
 
-const UtilityBar = ({ encode, disable, setDisable, loading, setLoading }) => {
+const UtilityBar = ({ encode, disable, setDisable, loading, setLoading, items }) => {
   const [codey, setCodey] = useState("");
+  const [encoded, setEncoded] = useState("");
   
   const map = useMapEvents({
     locationfound(e) {
@@ -17,11 +18,17 @@ const UtilityBar = ({ encode, disable, setDisable, loading, setLoading }) => {
 
   const onUseMylocation = () => {
     setLoading(true);
+    console.log(items[0]);
     map.locate();
+    
     console.log(map.locate()._lastCenter);
     const pin = map.locate()._lastCenter;
     let array = [pin.lat, pin.lng];
+    let array2 = [array, items];
     setCodey(array);
+    let encodethis = btoa(JSON.stringify(items))
+    console.log(encodethis);
+    setEncoded(encodethis);
   };
 
   return (
@@ -48,6 +55,7 @@ const UtilityBar = ({ encode, disable, setDisable, loading, setLoading }) => {
           pathname: "/app/arrange/checkout",
           query: {
             code: codey,
+            item: encoded
           }, // the data
         }}
       >

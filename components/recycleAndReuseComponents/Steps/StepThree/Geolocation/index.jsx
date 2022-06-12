@@ -197,13 +197,14 @@ export default function Geolocation({ userItems }) {
                     onChange={onChangeHandler}
                     components={{ NoOptions }}
                     styles={selectStyles}
-                  /> */}
+                  /> */} 
                   <UtilityBar
                     encode={encode}
                     disable={disable}
 										setDisable={setDisable}
                     loading={loading}
                     setLoading={setLoading}
+                    items={userItems}
                   />
                 </div>
                 <LocationMarker position={position} setPosition={setPosition} />
