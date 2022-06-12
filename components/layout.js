@@ -4,40 +4,34 @@ import {
   Button,
   ButtonGroup,
   Container,
+  Drawer,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerHeader,
+  DrawerBody,
+  DrawerCloseButton,
   Flex,
   HStack,
   IconButton,
+  List,
+  ListItem,
+  ListIcon,
   useBreakpointValue,
   useColorModeValue,
+  useDisclosure,
 } from '@chakra-ui/react'
 import * as React from 'react'
 import { FiHelpCircle, FiMenu, FiSettings } from 'react-icons/fi'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
+import { MdCheckCircle, MdSettings } from 'react-icons/md'
+import { useCookies } from 'react-cookie'
+import { LINKS } from '../utils/links'
+import { METAINFO } from '../data/mockUserData'
 
 const Layout = ({ children }) => {
-  const links = [
-    {
-      name: 'stats',
-      path: 'stats',
-    },
-    {
-      name: 'schedule',
-      path: 'schedule',
-    },
-    {
-      name: 'arrange',
-      path: 'arrange',
-    },
-    {
-      name: 'leaderboard',
-      path: 'leaderboard',
-    },
-    {
-      name: 'rewards',
-      path: 'rewards',
-    },
-  ]
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const [cookie] = useCookies(['type'])
   const router = useRouter()
   const basePath = `/${router.pathname.split('/')[1]}`
   const isDesktop = useBreakpointValue({
@@ -48,6 +42,10 @@ const Layout = ({ children }) => {
   const handleLinkClick = (e, url) => {
     e.preventDefault()
     return router.push(`${basePath}/${url}`)
+  }
+
+  const handleMenuOpen = () => {
+    onOpen()
   }
 
   return (
@@ -74,7 +72,7 @@ const Layout = ({ children }) => {
               <HStack spacing='4'>
                 {isDesktop && (
                   <ButtonGroup variant='ghost' spacing='1'>
-                    {links.map((link) => (
+                    {LINKS[cookie.type].map((link) => (
                       <Link key={link.name} href={`${basePath}/${link.path}`}>
                         <Button>{link.name}</Button>
                       </Link>
@@ -88,7 +86,7 @@ const Layout = ({ children }) => {
                     <IconButton
                       icon={<FiSettings fontSize='1.25rem' />}
                       aria-label='Settings'
-                      onClick={(e) => handleLinkClick(e, 'help')}
+                      onClick={(e) => handleLinkClick(e, 'config')}
                     />
                     <IconButton
                       icon={<FiHelpCircle fontSize='1.25rem' />}
@@ -98,23 +96,64 @@ const Layout = ({ children }) => {
                   </ButtonGroup>
                   <Avatar
                     boxSize='10'
-                    name='name'
-                    // src='https://tinyurl.com/yhkm2ek8'
+                    name={METAINFO[cookie.type].name}
+                    // src={METAINFO[cookie.type].img}
                   />
                 </HStack>
               ) : (
-                <IconButton
-                  variant='ghost'
-                  icon={<FiMenu fontSize='1.25rem' />}
-                  aria-label='Open Menu'
-                />
-                // TODO: implement menu
+                <>
+                  <IconButton
+                    variant='ghost'
+                    icon={<FiMenu fontSize='1.25rem' />}
+                    aria-label='Open Menu'
+                    onClick={handleMenuOpen}
+                  />
+                  <Drawer onClose={onClose} isOpen={isOpen} size='full'>
+                    <DrawerOverlay />
+                    <DrawerContent>
+                      <DrawerCloseButton />
+                      <DrawerHeader>RecycleGoWhere</DrawerHeader>
+                      <DrawerBody>
+                        <List spacing={10}>
+                          {LINKS[cookie.type].map((link) => (
+                            <Link
+                              key={link.name}
+                              href={`${basePath}/${link.path}`}
+                            >
+                              <ListItem
+                                key={link.name}
+                                fontWeight='semibold'
+                                letterSpacing='wide'
+                                fontSize='lg'
+                                onClick={onClose}
+                                _hover={{
+                                  background: 'white',
+                                  color: 'teal.500',
+                                }}
+                              >
+                                <ListIcon as={link.icon} />
+                                {link.name}
+                              </ListItem>
+                            </Link>
+                          ))}
+                        </List>
+                      </DrawerBody>
+                    </DrawerContent>
+                  </Drawer>
+                </>
               )}
             </Flex>
           </Container>
         </Box>
       </Box>
-      <Box as='main' display='flex' height='90vh' width='100vw' padding='8'>
+      <Box
+        as='main'
+        display='flex'
+        height='90vh'
+        width='100vw'
+        justifyContent='center'
+        alignItems='center'
+      >
         {children}
       </Box>
     </>
