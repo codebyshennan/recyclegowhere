@@ -24,3 +24,17 @@ By 2035, Pulau Semakau will be filled. In 20 years, plastic waste will triple fr
 ## How are we solving it?
 
 RecycleGoWhere hopes to make recycling simple and easy with a click of a button. Through our app, you can arrange for a driver to pick up your recyclables. With that you turn your recyclables into points that can be exchanged to Grab points! You can even track how much you have recycled and how much carbon offset you have achieved.
+
+## Instructions
+
+Install dependencies via `npm`
+
+```js
+npm install
+```
+
+Build the `dist` and start the server
+
+```js
+npm run build && npm run start
+```

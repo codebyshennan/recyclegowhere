@@ -25,7 +25,16 @@ export const ProductCard = (props) => {
     onOpen()
   }
 
-  const eventList = ['', 'step1', 'step2', 'step3']
+  const eventList = [
+    'Loading...',
+    'Connecting to Rewards Gateway...',
+    'Synchronizing...',
+    'Exchanging Reward Points...',
+    'Ensuring Transaction Success...',
+    'Terminating Connection...',
+    'Cleaning up...',
+    'Exchange Successful!',
+  ]
 
   return (
     <>
@@ -87,7 +96,7 @@ export const ProductCard = (props) => {
         </Stack>
       </Stack>
       <Orchestrator
-        title={'Processing'}
+        title={'Processing Rewards'}
         eventList={eventList}
         isOpen={isOpen}
         onClose={onClose}

@@ -61,14 +61,24 @@ const Orchestrator = ({ title, eventList, isOpen, onClose }) => {
         <ModalHeader>{title}</ModalHeader>
         {!success && (
           <ModalBody pb={6}>
-            <Spinner
-              thickness='4px'
-              speed='0.65s'
-              emptyColor='gray.200'
-              color='blue.500'
-              size='xl'
-            />
-            <Text>{eventList[eventNo]}</Text>
+            <Flex
+              my={10}
+              justifyContent='center'
+              direction='column'
+              alignItems='center'
+            >
+              <Spinner
+                my={10}
+                thickness='4px'
+                speed='0.65s'
+                emptyColor='gray.200'
+                color='blue.500'
+                size='xl'
+              />
+              <Text my={10} align='center'>
+                {eventList[eventNo]}
+              </Text>
+            </Flex>
           </ModalBody>
         )}
         {success && <SuccessMessage />}

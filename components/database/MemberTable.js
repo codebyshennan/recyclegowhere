@@ -16,7 +16,7 @@ import {
 import React from 'react'
 import { FiEdit2, FiTrash2 } from 'react-icons/fi'
 import { IoArrowDown } from 'react-icons/io5'
-import { members } from './_data'
+import { items } from './_data'
 
 const MemberTable = (props) => (
   <Table {...props}>
@@ -25,55 +25,49 @@ const MemberTable = (props) => (
         <Th>
           <HStack spacing='3'>
             <HStack spacing='1'>
-              <Text>Name</Text>
+              <Text>Item</Text>
               <Icon as={IoArrowDown} color='muted' boxSize='4' />
             </HStack>
           </HStack>
         </Th>
-        <Th>Ranking</Th>
-        <Th>Region</Th>
-        <Th>Location</Th>
-        <Th>Carbon Offset (Volume)</Th>
+        <Th>CO2 offset/ unit</Th>
+        <Th>Collection Group (units)</Th>
+        <Th>CO2 offset/ group</Th>
+        <Th>Equiv. Pts</Th>
         <Th></Th>
       </Tr>
     </Thead>
     <Tbody>
-      {members.map((member) => (
-        <Tr key={member.id}>
+      {items.map((Item) => (
+        <Tr key={Item.id}>
           <Td>
             <HStack spacing='3'>
-              <Avatar name={member.name} src={member.avatarUrl} boxSize='10' />
-              <Box>
-                <Text fontWeight='medium'>{member.name}</Text>
-                <Text color='muted'>{member.handle}</Text>
-              </Box>
+              <Text fontWeight='medium'>{Item.name}</Text>
             </HStack>
           </Td>
           <Td textAlign='center'>
+            <Text fontWeight='medium'>{Item.unitOffset}</Text>
+          </Td>
+          <Td textAlign='center'>
+            <Text color='muted'>{Item.groupUnits}</Text>
+          </Td>
+          <Td textAlign='center'>{Item.groupOffsets}</Td>
+          <Td textAlign='center'>
             <Badge size='sm' colorScheme={'green'}>
-              {member.status}
+              <Text color='muted'>{Item.points}</Text>
             </Badge>
-          </Td>
-          <Td textAlign='center'>
-            <Text color='muted'>{member.email}</Text>
-          </Td>
-          <Td textAlign='center'>
-            <Text color='muted'>{member.role}</Text>
-          </Td>
-          <Td textAlign='center'>
-            <Text color='muted'>{member.rating}</Text>
           </Td>
           <Td>
             <HStack spacing='1'>
               <IconButton
                 icon={<FiTrash2 fontSize='1.25rem' />}
                 variant='ghost'
-                aria-label='Delete member'
+                aria-label='Delete Item'
               />
               <IconButton
                 icon={<FiEdit2 fontSize='1.25rem' />}
                 variant='ghost'
-                aria-label='Edit member'
+                aria-label='Edit Item'
               />
             </HStack>
           </Td>
