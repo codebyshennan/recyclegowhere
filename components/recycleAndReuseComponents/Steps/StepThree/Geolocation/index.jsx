@@ -189,7 +189,7 @@ export default function Geolocation({ userItems }) {
                     marginTop: '5%',
                   }}
                 >
-                  <AsyncSelect
+                  {/* <AsyncSelect
                     value={inputAddress.current}
                     isSearchable
                     placeholder={'Enter your Location'}
@@ -197,7 +197,7 @@ export default function Geolocation({ userItems }) {
                     onChange={onChangeHandler}
                     components={{ NoOptions }}
                     styles={selectStyles}
-                  />
+                  /> */}
                   <UtilityBar
                     encode={encode}
                     disable={disable}

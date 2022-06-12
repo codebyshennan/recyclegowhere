@@ -5,6 +5,8 @@ import { Button } from "@chakra-ui/react";
 import { useMapEvents } from "react-leaflet";
 
 const UtilityBar = ({ encode, disable, setDisable, loading, setLoading }) => {
+  const [codey, setCodey] = useState("");
+  
   const map = useMapEvents({
     locationfound(e) {
       map.flyTo(e.latlng);
@@ -16,6 +18,10 @@ const UtilityBar = ({ encode, disable, setDisable, loading, setLoading }) => {
   const onUseMylocation = () => {
     setLoading(true);
     map.locate();
+    console.log(map.locate()._lastCenter);
+    const pin = map.locate()._lastCenter;
+    let array = [pin.lat, pin.lng];
+    setCodey(array);
   };
 
   return (
@@ -41,7 +47,7 @@ const UtilityBar = ({ encode, disable, setDisable, loading, setLoading }) => {
         href={{
           pathname: "/app/arrange/checkout",
           query: {
-            code: encode.current,
+            code: codey,
           }, // the data
         }}
       >
