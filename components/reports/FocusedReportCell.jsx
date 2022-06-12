@@ -3,14 +3,24 @@ import {
   Button,
   HStack,
   Icon,
+  Link,
   Square,
   Stack,
   Text,
 } from '@chakra-ui/react'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useCookies } from 'react-cookie'
 import { FiFileText } from 'react-icons/fi'
+import { METAINFO } from '../../utils/identity'
 
 const FocusedReportCell = ({ file }) => {
+  const [cookies] = useCookies(['type'])
+  const [bg, setBg] = useState('')
+
+  useEffect(() => {
+    setBg(METAINFO[cookies.type].bg)
+  }, [cookies])
+
   return (
     <Stack spacing='5'>
       <Stack spacing='1'>
@@ -43,8 +53,12 @@ const FocusedReportCell = ({ file }) => {
             </Box>
           </HStack>
           <Stack spacing='3' direction={{ base: 'column-reverse', md: 'row' }}>
-            <Button variant='secondary'>Download</Button>
-            <Button variant='primary'>View</Button>
+            <Link href='/CC_report_xx22.pdf' isExternal>
+              <Button bg={bg}>Download</Button>
+            </Link>
+            <Link>
+              <Button bg={bg}>View</Button>
+            </Link>
           </Stack>
         </Stack>
       </Box>

@@ -18,6 +18,7 @@ import {
   Stack,
   Icon,
   Text,
+  Tooltip,
   useBreakpointValue,
   useColorModeValue,
   useDisclosure,
@@ -101,16 +102,27 @@ const Layout = ({ children }) => {
               {isDesktop ? (
                 <HStack spacing='8' justify='space-between'>
                   <ButtonGroup variant='ghost' spacing='3'>
-                    <IconButton
-                      icon={<FiSettings fontSize='1.25rem' />}
-                      aria-label='Settings'
-                      onClick={(e) => handleLinkClick(e, 'config')}
-                    />
-                    <IconButton
-                      icon={<FiHelpCircle fontSize='1.25rem' />}
-                      aria-label='Help Center'
-                      onClick={(e) => handleLinkClick(e, 'help')}
-                    />
+                    <Tooltip hasArrow label='Settings'>
+                      <IconButton
+                        icon={<FiSettings fontSize='1.25rem' />}
+                        aria-label='Settings'
+                        onClick={(e) => handleLinkClick(e, 'config')}
+                      />
+                    </Tooltip>
+                    <Tooltip hasArrow label='Help'>
+                      <IconButton
+                        icon={<FiHelpCircle fontSize='1.25rem' />}
+                        aria-label='Help Center'
+                        onClick={(e) => handleLinkClick(e, 'help')}
+                      />
+                    </Tooltip>
+                    <Tooltip hasArrow label='Log Out'>
+                      <IconButton
+                        icon={<GrLogout fontSize='1.25rem' />}
+                        aria-label='Log Out'
+                        onClick={() => router.push('/login')}
+                      />
+                    </Tooltip>
                   </ButtonGroup>
                   <Avatar
                     boxSize='10'

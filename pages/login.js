@@ -85,6 +85,7 @@ const Login = () => {
               /> */}
               <Select
                 placeholder='Select Role'
+                color='#319795'
                 onChange={(e) => setEmail(e.target.value)}
               >
                 {Object.entries(METAINFO).map(([key, val]) => (
@@ -95,7 +96,7 @@ const Login = () => {
               </Select>
             </Stack>
             <Stack direction={{ base: 'column', sm: 'row' }} spacing='4' mt='8'>
-              <Button colorScheme='blue' onClick={handleLogin}>
+              <Button bg={'#319795'} color='white' onClick={handleLogin}>
                 Log In
               </Button>
               {/* <Button

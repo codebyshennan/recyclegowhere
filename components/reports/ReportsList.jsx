@@ -1,7 +1,16 @@
 import { Box, Center, Stack, StackDivider, Text } from '@chakra-ui/react'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useCookies } from 'react-cookie'
+import { METAINFO } from '../../utils/identity'
 
 const ReportsList = ({ data, setFileInfo }) => {
+  const [cookies] = useCookies(['type'])
+  const [bg, setBg] = useState('')
+
+  useEffect(() => {
+    setBg(METAINFO[cookies.type].bg)
+  }, [cookies])
+
   const handleFileSelect = (file) => {
     setFileInfo(file)
   }
@@ -17,6 +26,7 @@ const ReportsList = ({ data, setFileInfo }) => {
               px='4'
               spacing='0.5'
               onClick={() => handleFileSelect(file)}
+              _hover={{ bg }}
             >
               <Box>
                 <Text fontWeight='medium' color='emphasized'>
