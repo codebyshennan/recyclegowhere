@@ -41,7 +41,7 @@ export const InstructionalBox = () => (
 			</Box>
 			<Box flexGrow={1} h={"100%"} w={"100%"}>
 				<Image
-					src="/unclesemakau_singlet.png"
+					src="/unclesemakau.png"
 					alt="Uncle Semakau in a Singlet"
 					ml={["0%", "10%  ", "20%", "30%", "35%"]}
 					// w={["100%", "80%", "70%", "55%"]}
