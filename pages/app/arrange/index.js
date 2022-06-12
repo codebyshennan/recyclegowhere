@@ -1,52 +1,51 @@
-
-import React from "react";
-import Layout from "../../components/Layout";
-import { AddIcon, CheckIcon, DeleteIcon, EditIcon } from "@chakra-ui/icons";
-import { Box, Center, Flex, HStack } from "@chakra-ui/react";
+import React from 'react'
+import Layout from '../../../components/Layout'
+import { AddIcon, CheckIcon, DeleteIcon, EditIcon } from '@chakra-ui/icons'
+import { Box, Center, Flex } from '@chakra-ui/react'
 // STEPPER IMPORTS
-import { Step, Steps } from "chakra-ui-steps";
-import dynamic from "next/dynamic";
-import { useState } from "react";
-import Head from "../../components/Head";
+import { Step, Steps } from 'chakra-ui-steps'
+import dynamic from 'next/dynamic'
+import { useState } from 'react'
+import Head from '../../../components/Head'
 import {
   AddItem,
   Location,
   TakeAction,
   VerifyItem,
-} from "../../components/recycleAndReuseComponents/Steps";
-import GeneralWaste from "../../jsonfiles/General-Waste.json";
-import Item from "../../jsonfiles/Item.json";
+} from '../../../components/recycleAndReuseComponents/Steps'
+import GeneralWaste from '../../../jsonfiles/General-Waste.json'
+import Item from '../../../jsonfiles/Item.json'
 
 const GeolocationNoSSR = dynamic(
   () =>
     import(
-      "../../components/recycleAndReuseComponents/Steps/StepThree/Geolocation"
+      '../../../components/recycleAndReuseComponents/Steps/StepThree/Geolocation'
     ),
   {
     loading: () => <p>Map is loading</p>,
     ssr: false,
   }
-);
+)
 
 const ArrangeApp = ({ data }) => {
-  const [items, setItems] = useState([]);
-  const [step, setStep] = useState(0);
-  const [geolocation, setGeolocation] = useState(false);
-  const [location, setLocation] = useState(false);
+  const [items, setItems] = useState([])
+  const [step, setStep] = useState(0)
+  const [geolocation, setGeolocation] = useState(false)
+  const [location, setLocation] = useState(false)
   return (
     <Center>
-      <Head title="Reuse and Recycle" />
-      <Box w={["70vw", "60vw", "40wv"]} pl={25}>
-        <Flex flexDir="column" width="100%">
+      <Head title='Reuse and Recycle' />
+      <Box w={['70vw', '60vw', '40wv']} pl={25}>
+        <Flex flexDir='column' width='100%'>
           <Steps
             activeStep={step}
             responsive={false}
-            colorScheme="teal"
+            colorScheme='teal'
             p={3}
-            size="md"
+            size='md'
           >
             {/* Add items to the recycling list */}
-            <Step icon={AddIcon} key="0" data-testid="tab">
+            <Step icon={AddIcon} key='0' data-testid='tab'>
               <AddItem
                 setNextStep={() => setStep(1)}
                 data={data}
@@ -55,7 +54,7 @@ const ArrangeApp = ({ data }) => {
             </Step>
 
             {/* Verify that the items are empty, rinsed or dried  */}
-            <Step icon={EditIcon} key="1" data-testid="tab">
+            <Step icon={EditIcon} key='1' data-testid='tab'>
               <VerifyItem
                 items={items}
                 setItems={setItems}
@@ -65,7 +64,7 @@ const ArrangeApp = ({ data }) => {
             </Step>
 
             {/* Decide what action to take: either house pickup or self-disposal */}
-            <Step icon={DeleteIcon} key="2" data-testid="tab">
+            <Step icon={DeleteIcon} key='2' data-testid='tab'>
               {geolocation ? (
                 <GeolocationNoSSR userItems={items} />
               ) : location ? (
@@ -85,17 +84,17 @@ const ArrangeApp = ({ data }) => {
             </Step>
 
             {/* Final Confirmation and Summary List*/}
-            <Step icon={CheckIcon} key="3" data-testid="tab"></Step>
+            <Step icon={CheckIcon} key='3' data-testid='tab'></Step>
           </Steps>
         </Flex>
       </Box>
     </Center>
-  );
-};
+  )
+}
 
 export async function getStaticProps() {
-  let items = Item || [];
-  let generalWasteItemDetails = GeneralWaste || [];
+  let items = Item || []
+  let generalWasteItemDetails = GeneralWaste || []
 
   return {
     props: {
@@ -104,11 +103,11 @@ export async function getStaticProps() {
         generalWasteItemDetails: generalWasteItemDetails,
       },
     },
-  };
+  }
 }
 
 ArrangeApp.getLayout = function getLayout(page) {
-  return <Layout>{page}</Layout>;
-};
+  return <Layout>{page}</Layout>
+}
 
-export default ArrangeApp;
+export default ArrangeApp

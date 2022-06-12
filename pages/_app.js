@@ -2,7 +2,7 @@ import '../styles/globals.css'
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import { CookiesProvider } from 'react-cookie'
 import '@fontsource/inter/variable.css'
-import { StepsStyleConfig as Steps } from 'chakra-ui-steps';
+import { StepsStyleConfig as Steps } from 'chakra-ui-steps'
 
 // add layout
 
@@ -11,9 +11,9 @@ export const extendedTheme = extendTheme({
     initialColorMode: 'light',
     useSystemColorMode: false,
   },
-  components:{
+  components: {
     Steps,
-  }
+  },
   // colors: { ...theme.colors, brand: theme.colors.purple },
 })
 

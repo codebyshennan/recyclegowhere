@@ -13,31 +13,40 @@ import {
   Flex,
   HStack,
   IconButton,
+  Link,
   List,
-  ListItem,
-  ListIcon,
+  Stack,
+  Icon,
+  Text,
   useBreakpointValue,
   useColorModeValue,
   useDisclosure,
 } from '@chakra-ui/react'
-import * as React from 'react'
+import React, { useEffect, useState } from 'react'
 import { FiHelpCircle, FiMenu, FiSettings } from 'react-icons/fi'
 import { useRouter } from 'next/router'
-import Link from 'next/link'
-import { MdCheckCircle, MdSettings } from 'react-icons/md'
 import { useCookies } from 'react-cookie'
 import { LINKS } from '../utils/links'
 import { METAINFO } from '../data/mockUserData'
 
 const Layout = ({ children }) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const [cookie] = useCookies(['type'])
+  const [cookies] = useCookies(['type'])
+  const [userLinks, setUserLinks] = useState([])
   const router = useRouter()
   const basePath = `/${router.pathname.split('/')[1]}`
   const isDesktop = useBreakpointValue({
     base: false,
     lg: true,
   })
+
+  useEffect(() => {
+    setUserLinks(LINKS[cookies.type])
+
+    return () => {
+      setUserLinks([])
+    }
+  }, [cookies])
 
   const handleLinkClick = (e, url) => {
     e.preventDefault()
@@ -72,7 +81,7 @@ const Layout = ({ children }) => {
               <HStack spacing='4'>
                 {isDesktop && (
                   <ButtonGroup variant='ghost' spacing='1'>
-                    {LINKS[cookie.type].map((link) => (
+                    {userLinks.map((link) => (
                       <Link key={link.name} href={`${basePath}/${link.path}`}>
                         <Button>{link.name}</Button>
                       </Link>
@@ -96,8 +105,8 @@ const Layout = ({ children }) => {
                   </ButtonGroup>
                   <Avatar
                     boxSize='10'
-                    name={METAINFO[cookie.type].name}
-                    // src={METAINFO[cookie.type].img}
+                    name={METAINFO[cookies.type].name}
+                    // src={METAINFO[cookies.type].img}
                   />
                 </HStack>
               ) : (
@@ -115,25 +124,25 @@ const Layout = ({ children }) => {
                       <DrawerHeader>RecycleGoWhere</DrawerHeader>
                       <DrawerBody>
                         <List spacing={10}>
-                          {LINKS[cookie.type].map((link) => (
+                          {userLinks.map((link) => (
                             <Link
-                              key={link.name}
+                              variant='menu'
                               href={`${basePath}/${link.path}`}
+                              key={link.name}
                             >
-                              <ListItem
-                                key={link.name}
-                                fontWeight='semibold'
-                                letterSpacing='wide'
-                                fontSize='lg'
-                                onClick={onClose}
-                                _hover={{
-                                  background: 'white',
-                                  color: 'teal.500',
-                                }}
-                              >
-                                <ListIcon as={link.icon} />
-                                {link.name}
-                              </ListItem>
+                              <Stack spacing='4' direction='row' p='3'>
+                                <Icon
+                                  as={link.icon}
+                                  boxSize='6'
+                                  color='accent'
+                                />
+                                <Stack spacing='1'>
+                                  <Text fontWeight='medium'>{link.name}</Text>
+                                  <Text fontSize='sm' color='muted'>
+                                    {/* {link.description} */}
+                                  </Text>
+                                </Stack>
+                              </Stack>
                             </Link>
                           ))}
                         </List>
@@ -152,7 +161,6 @@ const Layout = ({ children }) => {
         height='90vh'
         width='100vw'
         justifyContent='center'
-        alignItems='center'
       >
         {children}
       </Box>
