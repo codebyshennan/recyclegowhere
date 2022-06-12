@@ -1,7 +1,7 @@
 # RecycleGoWhere
 
 <p align="center">
-  <img height="100px" src="img/recyclegowhere2.png" />
+  <img height="100px" src="./public/recyclegowhere.png" />
 </p>
 
 <em>As part of the submission requirements for
