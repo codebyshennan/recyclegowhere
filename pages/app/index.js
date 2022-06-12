@@ -5,9 +5,14 @@ import { Step, Steps } from "chakra-ui-steps";
 import dynamic from "next/dynamic";
 import { useState } from "react";
 import Head from "../../components/Head";
-import {AddItem} from "../../components/Steps/AddItem";
-import GeneralWaste from "../jsonfiles/General-Waste.json";
-import Item from "../jsonfiles/Item.json";
+import {
+	AddItem,
+	Location,
+	TakeAction,
+	VerifyItem,
+} from "../../components/recycleAndReuseComponents/Steps";
+// import GeneralWaste from "../jsonfiles/General-Waste.json";
+// import Item from "../jsonfiles/Item.json";
 
 const GeolocationNoSSR = dynamic(
   () =>
