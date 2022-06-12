@@ -1,6 +1,6 @@
 import '../styles/globals.css'
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
-// import { theme } from '@chakra-ui/pro-theme'
+import { CookiesProvider } from 'react-cookie'
 import '@fontsource/inter/variable.css'
 import { StepsStyleConfig as Steps } from 'chakra-ui-steps';
 
@@ -21,9 +21,11 @@ function App({ Component, pageProps }) {
   const getLayout = Component.getLayout || ((page) => page)
 
   return (
-    <ChakraProvider theme={extendedTheme}>
-      {getLayout(<Component {...pageProps} />)}
-    </ChakraProvider>
+    <CookiesProvider>
+      <ChakraProvider theme={extendedTheme}>
+        {getLayout(<Component {...pageProps} />)}
+      </ChakraProvider>
+    </CookiesProvider>
   )
 }
 
