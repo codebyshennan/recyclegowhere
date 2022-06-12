@@ -66,9 +66,6 @@ const DataTable = () => {
                 md: 'row',
               }}
             >
-              <Text fontSize='lg' fontWeight='medium'>
-                Members
-              </Text>
               {/* <InputGroup maxW='xs'>
                 <InputLeftElement pointerEvents='none'>
                   <Icon as={FiSearch} color='muted' boxSize='5' />
@@ -90,7 +87,7 @@ const DataTable = () => {
             <HStack spacing='3' justify='space-between'>
               {!isMobile && (
                 <Text color='muted' fontSize='sm'>
-                  Showing 1 to 5 of 42 results
+                  Showing 1 to 5 of 1 result(s)
                 </Text>
               )}
               <ButtonGroup

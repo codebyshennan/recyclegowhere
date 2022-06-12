@@ -31,10 +31,10 @@ const MemberTable = (props) => (
             </HStack>
           </HStack>
         </Th>
-        <Th>Status</Th>
-        <Th>Email</Th>
-        <Th>Role</Th>
-        <Th>Rating</Th>
+        <Th>Ranking</Th>
+        <Th>Region</Th>
+        <Th>Location</Th>
+        <Th>Carbon Offset (Volume)</Th>
         <Th></Th>
       </Tr>
     </Thead>
@@ -50,38 +50,22 @@ const MemberTable = (props) => (
               </Box>
             </HStack>
           </Td>
-          <Td>
+          <Td textAlign="center">
             <Badge
               size='sm'
-              colorScheme={member.status === 'active' ? 'green' : 'red'}
+              colorScheme={'green'}
             >
               {member.status}
             </Badge>
           </Td>
-          <Td>
+          <Td textAlign="center">
             <Text color='muted'>{member.email}</Text>
           </Td>
-          <Td>
+          <Td textAlign="center">
             <Text color='muted'>{member.role}</Text>
           </Td>
-          <Td>
-            <Text color='muted'>
-              <Rating defaultValue={member.rating} size='xl' />
-            </Text>
-          </Td>
-          <Td>
-            <HStack spacing='1'>
-              <IconButton
-                icon={<FiTrash2 fontSize='1.25rem' />}
-                variant='ghost'
-                aria-label='Delete member'
-              />
-              <IconButton
-                icon={<FiEdit2 fontSize='1.25rem' />}
-                variant='ghost'
-                aria-label='Edit member'
-              />
-            </HStack>
+          <Td textAlign="center">
+            <Text color='muted'>{member.rating}</Text>
           </Td>
         </Tr>
       ))}
