@@ -93,11 +93,11 @@ const Checkout = () => {
                   Long: {latlng[1]}
                   <br />
                   <br />
+                  <p>
+                    <strong>Your Items:</strong>
+                  </p>
                   {items.map((ite, idx) => (
                     <div key={`${ite.category}-${idx}`}>
-                      <p>
-                        <strong>Your Items:</strong>
-                      </p>
                       <p>Description: {ite.description}</p>
                       <p>Category: {ite.category}</p>
                       <p>-</p>
