@@ -5,12 +5,12 @@ import {
   useBreakpointValue,
   useColorModeValue,
 } from '@chakra-ui/react'
-import * as React from 'react'
-import Layout from '../../../../components/Layout'
+import React from 'react'
 import { OrderSummary } from '../../../../components/checkout/OrderSummary'
 import { PaymentInformation } from '../../../../components/checkout/PaymentInformation'
 import { ShippingInformation } from '../../../../components/checkout/ShippingInformation'
 import { ShippingMethod } from '../../../../components/checkout/ShippingMethod'
+import Layout from '../../../../components/Layout'
 
 const Checkout = () => (
   <Box

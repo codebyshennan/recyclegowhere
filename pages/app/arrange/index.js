@@ -1,5 +1,4 @@
 import React from 'react'
-import Layout from '../../../components/Layout'
 import { AddIcon, CheckIcon, DeleteIcon, EditIcon } from '@chakra-ui/icons'
 import { Box, Center, Flex } from '@chakra-ui/react'
 // STEPPER IMPORTS
@@ -15,6 +14,7 @@ import {
 } from '../../../components/recycleAndReuseComponents/Steps'
 import GeneralWaste from '../../../jsonfiles/General-Waste.json'
 import Item from '../../../jsonfiles/Item.json'
+import Layout from '../../../components/Layout'
 
 const GeolocationNoSSR = dynamic(
   () =>

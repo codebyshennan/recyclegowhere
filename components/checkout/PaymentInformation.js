@@ -13,7 +13,7 @@ import {
   Text,
   useColorModeValue,
 } from '@chakra-ui/react'
-import * as React from 'react'
+import React from 'react'
 import { GooglePayLogo, MasterCardLogo, PayPalLogo, VisaLogo } from './Logos'
 
 export const PaymentInformation = () => (
