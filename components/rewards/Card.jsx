@@ -1,19 +1,26 @@
-import { Box, Button, Container, Stack, Text, useColorModeValue } from '@chakra-ui/react'
-import * as React from 'react'
+import {
+  Box,
+  Button,
+  Container,
+  Stack,
+  Text,
+  useColorModeValue,
+} from '@chakra-ui/react'
+import React from 'react'
 
 export const Card = () => (
   <Box
-    as="section"
+    as='section'
     py={{
       base: '4',
       md: '8',
     }}
   >
-    <Container maxW="3xl">
+    <Container maxW='3xl'>
       <Box
-        bg="bg-surface"
+        bg='bg-surface'
         boxShadow={useColorModeValue('sm', 'sm-dark')}
-        borderRadius="lg"
+        borderRadius='lg'
         p={{
           base: '4',
           md: '6',
@@ -28,13 +35,13 @@ export const Card = () => (
             base: '5',
             md: '6',
           }}
-          justify="space-between"
+          justify='space-between'
         >
-          <Stack spacing="1">
-            <Text fontSize="lg" fontWeight="medium">
+          <Stack spacing='1'>
+            <Text fontSize='lg' fontWeight='medium'>
               2000 Points Available
             </Text>
-            <Text fontSize="sm" color="muted">
+            <Text fontSize='sm' color='muted'>
               You have accumulated 2000 points from your efforts in recycling!
             </Text>
           </Stack>

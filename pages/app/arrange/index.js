@@ -33,63 +33,64 @@ const ArrangeApp = ({ data }) => {
   const [geolocation, setGeolocation] = useState(false)
   const [location, setLocation] = useState(false)
   return (
-    <Center>
-      <Head title='Reuse and Recycle' />
-      <Box w={['70vw', '60vw', '40wv']} pl={25}>
-        {console.log(data)}
-        <Flex flexDir='column' width='100%'>
-          <Steps
-            activeStep={step}
-            responsive={false}
-            colorScheme='teal'
-            p={3}
-            size='md'
-          >
-            {/* Add items to the recycling list */}
-            <Step icon={AddIcon} key='0' data-testid='tab'>
-              <AddItem
-                setNextStep={() => setStep(1)}
-                data={data}
-                setItems={setItems}
-              />
-            </Step>
-
-            {/* Verify that the items are empty, rinsed or dried  */}
-            <Step icon={EditIcon} key='1' data-testid='tab'>
-              <VerifyItem
-                items={items}
-                setItems={setItems}
-                generalWasteItemDetails={data.generalWasteItemDetails}
-                navigateToTakeAction={() => setStep(2)}
-              />
-            </Step>
-
-            {/* Decide what action to take: either house pickup or self-disposal */}
-            <Step icon={DeleteIcon} key='2' data-testid='tab'>
-              {geolocation ? (
-                <GeolocationNoSSR userItems={items} />
-              ) : location ? (
-                <Location
-                  items={items}
-                  setGeolocation={setGeolocation}
-                  setLocation={setLocation}
+    <Box mt={10}>
+      <Center>
+        <Head title='Reuse and Recycle' />
+        <Box w={['70vw', '60vw', '40wv']} pl={25}>
+          <Flex flexDir='column' width='100%'>
+            <Steps
+              activeStep={step}
+              responsive={false}
+              colorScheme='teal'
+              p={3}
+              size='md'
+            >
+              {/* Add items to the recycling list */}
+              <Step icon={AddIcon} key='0' data-testid='tab'>
+                <AddItem
+                  setNextStep={() => setStep(1)}
+                  data={data}
+                  setItems={setItems}
                 />
-              ) : (
-                <TakeAction
-                  items={items}
-                  setGeolocation={setGeolocation}
-                  setLocation={setLocation}
-                  navigateBackToAddItem={() => setStep(0)}
-                />
-              )}
-            </Step>
+              </Step>
 
-            {/* Final Confirmation and Summary List*/}
-            <Step icon={CheckIcon} key='3' data-testid='tab'></Step>
-          </Steps>
-        </Flex>
-      </Box>
-    </Center>
+              {/* Verify that the items are empty, rinsed or dried  */}
+              <Step icon={EditIcon} key='1' data-testid='tab'>
+                <VerifyItem
+                  items={items}
+                  setItems={setItems}
+                  generalWasteItemDetails={data.generalWasteItemDetails}
+                  navigateToTakeAction={() => setStep(2)}
+                />
+              </Step>
+
+              {/* Decide what action to take: either house pickup or self-disposal */}
+              <Step icon={DeleteIcon} key='2' data-testid='tab'>
+                {geolocation ? (
+                  <GeolocationNoSSR userItems={items} />
+                ) : location ? (
+                  <Location
+                    items={items}
+                    setGeolocation={setGeolocation}
+                    setLocation={setLocation}
+                  />
+                ) : (
+                  <TakeAction
+                    items={items}
+                    setGeolocation={setGeolocation}
+                    setLocation={setLocation}
+                    navigateBackToAddItem={() => setStep(0)}
+                  />
+                )}
+              </Step>
+
+              {/* Final Confirmation and Summary List*/}
+              <Step icon={CheckIcon} key='3' data-testid='tab'></Step>
+            </Steps>
+          </Flex>
+        </Box>
+      </Center>
+    </Box>
   )
 }
 

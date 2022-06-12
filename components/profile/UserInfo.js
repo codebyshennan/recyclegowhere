@@ -1,5 +1,5 @@
 import { HStack, Icon, Stack, Text, useColorModeValue } from '@chakra-ui/react'
-import * as React from 'react'
+import React from 'react'
 import { HiCalendar, HiLink, HiLocationMarker } from 'react-icons/hi'
 
 export const UserInfo = (props) => {

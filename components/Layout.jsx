@@ -21,18 +21,20 @@ import {
   useBreakpointValue,
   useColorModeValue,
   useDisclosure,
+  AvatarBadge,
 } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { FiHelpCircle, FiMenu, FiSettings } from 'react-icons/fi'
 import { useRouter } from 'next/router'
 import { useCookies } from 'react-cookie'
 import { LINKS } from '../utils/links'
-import { METAINFO } from '../data/mockUserData'
+import { METAINFO } from '../utils/identity'
 
 const Layout = ({ children }) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [cookies] = useCookies(['type'])
   const [userLinks, setUserLinks] = useState([])
+  const [metaInfo, setMetaInfo] = useState({})
   const router = useRouter()
   const basePath = `/${router.pathname.split('/')[1]}`
   const isDesktop = useBreakpointValue({
@@ -42,9 +44,11 @@ const Layout = ({ children }) => {
 
   useEffect(() => {
     setUserLinks(LINKS[cookies.type])
+    setMetaInfo(METAINFO[cookies.type])
 
     return () => {
       setUserLinks([])
+      setMetaInfo({})
     }
   }, [cookies])
 
@@ -62,13 +66,13 @@ const Layout = ({ children }) => {
       <Box
         as='section'
         pb={{
-          base: '2',
-          md: '4',
+          base: '1',
+          md: '3',
         }}
       >
         <Box
           as='nav'
-          bg='bg-surface'
+          bg={metaInfo.bg}
           boxShadow={useColorModeValue('sm', 'sm-dark')}
         >
           <Container
@@ -110,8 +114,10 @@ const Layout = ({ children }) => {
                   <Avatar
                     boxSize='10'
                     name={METAINFO[cookies.type].name}
-                    // src={METAINFO[cookies.type].img}
-                  />
+                    onClick={() => router.push('profile')}
+                  >
+                    <AvatarBadge boxSize='1.25em' bg='green.500' />
+                  </Avatar>
                 </HStack>
               ) : (
                 <>
@@ -121,7 +127,7 @@ const Layout = ({ children }) => {
                     aria-label='Open Menu'
                     onClick={handleMenuOpen}
                   />
-                  <Drawer onClose={onClose} isOpen={isOpen} size='full'>
+                  <Drawer onClose={onClose} isOpen={isOpen} size='xs'>
                     <DrawerOverlay />
                     <DrawerContent>
                       <DrawerCloseButton />
@@ -159,13 +165,7 @@ const Layout = ({ children }) => {
           </Container>
         </Box>
       </Box>
-      <Box
-        as='main'
-        display='flex'
-        height='90vh'
-        width='100vw'
-        justifyContent='center'
-      >
+      <Box as='main' display='flex' width='100vw' justifyContent='center'>
         {children}
       </Box>
     </>

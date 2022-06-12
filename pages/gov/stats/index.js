@@ -1,18 +1,7 @@
 import React from 'react'
 import Layout from '../../../components/Layout'
-import {
-  Text,
-  Center,
-  Heading,
-  Box,
-  SimpleGrid,
-  Stack,
-  useBreakpointValue,
-  useColorModeValue,
-  Button,
-} from '@chakra-ui/react'
+import { SimpleGrid, Stack } from '@chakra-ui/react'
 import StatCell from '../../../components/stat/StatCell'
-import { StatMembers } from '../../../components/stat/StatMembers'
 
 const stats = [
   {
@@ -47,16 +36,7 @@ const Stats = () => {
             <StatCell key={id} {...stat} />
           ))}
         </SimpleGrid>
-        <Center>
-          <StatMembers />
-        </Center>
       </Stack>
-      <Box
-        minH='36'
-        bg='bg-surface'
-        boxShadow={useColorModeValue('sm', 'sm-dark')}
-        borderRadius='lg'
-      />
     </Stack>
   )
 }

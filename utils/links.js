@@ -1,33 +1,67 @@
 import { MdDeliveryDining, MdLeaderboard, MdQueryStats } from 'react-icons/md'
-import { GrMoney, GrSchedule } from 'react-icons/gr'
+import { GrMoney, GrDocumentPdf } from 'react-icons/gr'
+import { FaDatabase, FaRegHeart } from 'react-icons/fa'
 
 const FMCG = [
   {
-    name: 'fmcg',
-    path: 'fmcg',
-    icon: '',
+    name: 'Stats',
+    path: 'stats',
+    icon: MdQueryStats,
+  },
+  {
+    name: 'Reports',
+    path: 'reports',
+    icon: GrDocumentPdf,
   },
 ]
 
 const GOV = [
   {
-    name: 'gov',
-    path: 'gov',
-    icon: '',
+    name: 'Database',
+    path: 'db',
+    icon: FaDatabase,
+  },
+  {
+    name: 'Stats',
+    path: 'stats',
+    icon: MdQueryStats,
+  },
+  {
+    name: 'Reports',
+    path: 'reports',
+    icon: GrDocumentPdf,
   },
 ]
 
 const GRAB = [
   {
-    name: 'grab',
-    path: 'grab',
-    icon: '',
+    name: 'Stats',
+    path: 'stats',
+    icon: MdQueryStats,
+  },
+  {
+    name: 'Reports',
+    path: 'reports',
+    icon: GrDocumentPdf,
+  },
+  {
+    name: 'Health',
+    path: 'health',
+    icon: FaRegHeart,
+  },
+]
+
+const PARTNER = [
+  {
+    name: 'Stats',
+    path: 'stats',
+    icon: MdQueryStats,
   },
 ]
 
 const USER = [
   {
-    name: 'stats',
+    name: 'Stats',
     path: 'stats',
     icon: MdQueryStats,
   },
@@ -37,17 +71,17 @@ const USER = [
   //   icon: GrSchedule,
   // },
   {
-    name: 'arrange',
+    name: 'Delivery',
     path: 'arrange',
     icon: MdDeliveryDining,
   },
   {
-    name: 'leaderboard',
+    name: 'Ranking',
     path: 'leaderboard',
     icon: MdLeaderboard,
   },
   {
-    name: 'rewards',
+    name: 'Rewards',
     path: 'rewards',
     icon: GrMoney,
   },
@@ -58,4 +92,5 @@ export const LINKS = {
   GOV,
   GRAB,
   USER,
+  PARTNER,
 }

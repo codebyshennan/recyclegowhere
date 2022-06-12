@@ -1,9 +1,9 @@
 import React from 'react'
 import Layout from '../../../components/Layout'
+import DataTable from '../../../components/database/DataTable'
 import { Box } from '@chakra-ui/react'
-import DataTable from '../../../components/leaderboard/DataTable'
 
-const Leaderboard = () => {
+const Database = () => {
   return (
     <Box mt={10}>
       <DataTable />
@@ -11,8 +11,8 @@ const Leaderboard = () => {
   )
 }
 
-Leaderboard.getLayout = function getLayout(page) {
+Database.getLayout = function getLayout(page) {
   return <Layout>{page}</Layout>
 }
 
-export default Leaderboard
+export default Database

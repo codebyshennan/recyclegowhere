@@ -13,6 +13,7 @@ import {
 import React, { useState } from 'react'
 import { useRouter } from 'next/router'
 import { useCookies } from 'react-cookie'
+import { METAINFO } from '../utils/identity'
 
 const Login = () => {
   const [email, setEmail] = useState('')
@@ -20,30 +21,15 @@ const Login = () => {
   const [_, setCookie] = useCookies(['type'])
 
   const handleLogin = () => {
-    switch (email) {
-      case 'consumer@demo.com':
-        setCookie('type', 'USER', { path: '/' })
-        router.push('/app/stats')
-        break
+    // find email match
+    const identities = Object.values(METAINFO)
+    const matchedIdentity = identities.filter((id) => id.email === email)
 
-      case 'grab@demo.com':
-        setCookie('type', 'GRAB', { path: '/' })
-        router.push('/grab')
-        break
+    if (!matchedIdentity || matchedIdentity.length === 0) return
+    const identifier = matchedIdentity[0]
 
-      case 'gov@demo.com':
-        setCookie('type', 'GOV', { path: '/' })
-        router.push('/gov')
-        break
-
-      case 'fmcg@demo.com':
-        setCookie('type', 'FMCG', { path: '/' })
-        router.push('/fmcg')
-        break
-
-      default:
-        break
-    }
+    setCookie('type', identifier.type, { path: '/' })
+    router.push(identifier.baseUrl)
   }
 
   return (

@@ -10,29 +10,19 @@ import {
   useBreakpointValue,
   useColorModeValue,
   Button,
+  Progress,
 } from '@chakra-ui/react'
 import StatCell from '../../../components/stat/StatCell'
-import { StatMembers } from '../../../components/stat/StatMembers'
 
 const stats = [
   {
-    label: 'Lifetime Carbon Offsets',
-    value: '71,887 tonnes',
-    delta: { value: '320', isUpwardsTrend: true },
-  },
-  {
-    label: 'Avg. Offsets / month',
-    value: '56.87 tonnes',
-    delta: { value: '2.3%', isUpwardsTrend: true },
-  },
-  {
-    label: 'Avg. Pts Earned / month',
-    value: '12.87 pts',
-    delta: { value: '0.1%', isUpwardsTrend: true },
+    label: 'Status',
+    value: 'Healthy',
+    delta: { value: 'OK', isUpwardsTrend: true },
   },
 ]
 
-const Stats = () => {
+const Health = () => {
   return (
     <Stack spacing={{ base: '8', lg: '6' }} maxWidth={'3xl'}>
       <Stack
@@ -46,23 +36,24 @@ const Stats = () => {
           {stats.map((stat, id) => (
             <StatCell key={id} {...stat} />
           ))}
+          <Stack spacing={5} justify='center'>
+            <Text fontSize='xs' py='0'>
+              GrabExpress Integration
+            </Text>
+            <Progress colorScheme='green' size='lg' value={100} />
+            <Text fontSize='xs' py='0'>
+              Uptime
+            </Text>
+            <Progress colorScheme='green' size='lg' value={99} />
+          </Stack>
         </SimpleGrid>
-        <Center>
-          <StatMembers />
-        </Center>
       </Stack>
-      <Box
-        minH='36'
-        bg='bg-surface'
-        boxShadow={useColorModeValue('sm', 'sm-dark')}
-        borderRadius='lg'
-      />
     </Stack>
   )
 }
 
-Stats.getLayout = function getLayout(page) {
+Health.getLayout = function getLayout(page) {
   return <Layout>{page}</Layout>
 }
 
-export default Stats
+export default Health

@@ -42,7 +42,7 @@ const Configurations = () => (
               Notifications
             </Text>
             <Text fontSize='sm' color='muted'>
-              Receive notifications about Chakra UI updates.
+              Receive notifications about RecycleGoWhere updates.
             </Text>
           </Stack>
           {notifications.map((notifcation, id) => (
