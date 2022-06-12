@@ -61,9 +61,9 @@ const Checkout = () => {
                       borderTopWidth='4px'
                       borderColor='accent'
                     >
-                      <Stack spacing='1'>
-                        <Text fontSize='lg' fontWeight='medium'>
-                          Order overview
+                      <Stack spacing="1">
+                        <Text fontSize="lg" fontWeight="medium">
+                          Delivery overview
                         </Text>
                         <Text color='muted' fontSize='sm'>
                           Summary of your delivery
@@ -91,7 +91,7 @@ const Checkout = () => {
                   <span>
                     <strong>Date of collection:</strong>
                   </span>
-                  <Calendar onChange={setValue} value={value} />
+                  <Calendar onChange={setValue} value={value}/>
                 </div>
               </Box>
             </Stack>
