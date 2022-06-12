@@ -1,4 +1,5 @@
 import '../styles/globals.css'
+import '../styles/leaflet.css'
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import { CookiesProvider } from 'react-cookie'
 import '@fontsource/inter/variable.css'

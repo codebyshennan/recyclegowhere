@@ -1,9 +1,14 @@
-import { ArrowForwardIcon, SearchIcon } from '@chakra-ui/icons'
-import { Button, useDisclosure } from '@chakra-ui/react'
+import { useDisclosure } from '@chakra-ui/react'
 import { OpenStreetMapProvider } from 'leaflet-geosearch'
-import Link from 'next/link'
 import React, { useRef, useState } from 'react'
-import { LayersControl, MapContainer, Marker, TileLayer } from 'react-leaflet'
+import {
+  LayersControl,
+  MapContainer,
+  Marker,
+  Popup,
+  TileLayer,
+  useMapEvents,
+} from 'react-leaflet'
 import AsyncSelect from 'react-select/async'
 import { selectStylesForColorModes } from '../../../../DarkModeSwitch'
 import { InfoBox } from './InfoBox'
@@ -12,6 +17,7 @@ import { markerHome, markerOthers, markerRecycle } from './markers'
 import { NoOptions } from './NoOptions'
 import { PopupInfo } from './PopupContentComponent'
 import SearchBar from './Searchbar'
+import UtilityBar from './UtilityBar'
 import {
   fetchOneMapSuggestions,
   getNearestBlueBin,
@@ -20,18 +26,30 @@ import {
 
 const { BaseLayer } = LayersControl
 
+const LocationMarker = ({ position, setPosition }) => {
+  const map = useMapEvents({
+    locationfound(e) {
+      setPosition(e.latlng)
+      map.flyTo(e.latlng, map.getZoom())
+    },
+  })
+
+  return position === null ? null : (
+    <Marker position={position} icon={markerHome}>
+      <Popup>You are here</Popup>
+    </Marker>
+  )
+}
+
 export default function Geolocation({ userItems }) {
   const { onToggle } = useDisclosure()
-  const prov = OpenStreetMapProvider()
+  const prov = new OpenStreetMapProvider()
+  const [position, setPosition] = useState(null)
 
   // Initial Position
   const mapCenter = useRef({
     lat: 1.36882713986152,
     lng: 103.950296238717,
-  })
-  const homeMarker = useRef({
-    lat: 1,
-    lng: 1,
   })
 
   // Encode JSON to Base64
@@ -46,20 +64,14 @@ export default function Geolocation({ userItems }) {
 
   // Disable button if no location
   const [disable, setDisable] = useState(true)
-  // Pre summary page loader
-  const [loader, setLoader] = useState(false)
 
   // Popup
   const [showPopup, setShowPopup] = useState(false)
   const [popupContent, setPopupContent] = useState('')
   const [displayDirection, setDisplayDirection] = useState(false)
 
-  const [map, setMap] = null
-
-  // Map Stuff
-  const switchLoader = () => {
-    setLoader(true)
-  }
+  const [map, setMap] = useState(null)
+  const [loading, setLoading] = useState(false)
 
   const onChangeHandler = (event) => {
     generateMarkers(
@@ -67,24 +79,6 @@ export default function Geolocation({ userItems }) {
       { lat: event.lat, lng: event.long },
       event.value
     )
-  }
-
-  const onUseMyLocation = () => {
-    const successCallback = (position) => {
-      const address = `${position.coords.latitude},${position.coords.longitude}`
-      generateMarkers(address, {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude,
-      })
-    }
-    const errorCallback = (/* error */) => {
-      //handle error
-    }
-
-    navigator.geolocation.getCurrentPosition(successCallback, errorCallback, {
-      enableHighAccuracy: true,
-      timeout: 25000,
-    })
   }
 
   const handleHomeMarkerClick = () => {
@@ -97,10 +91,6 @@ export default function Geolocation({ userItems }) {
   const generateMarkers = (addressLabel, { lat, lng }, postcode) => {
     inputAddress.current = addressLabel
     mapCenter.current = {
-      lat,
-      lng,
-    }
-    homeMarker.current = {
       lat,
       lng,
     }
@@ -143,7 +133,7 @@ export default function Geolocation({ userItems }) {
     }
     allLocations.push(person)
 
-    encode.current = btoa(JSON.stringify(allLocations))
+    encode.current = Buffer.from(JSON.stringify(allLocations), 'base64')
     setDisable(false)
   }
 
@@ -154,81 +144,11 @@ export default function Geolocation({ userItems }) {
           position: 'relative',
         }}
       >
-        {/* Multiselect+Buttons */}
-        <div
-          style={{
-            position: 'absolute',
-            width: '90%',
-            height: 'auto',
-            top: 0,
-            zIndex: 10000,
-            justifyContent: 'center',
-            left: { left_proportion: '50%' },
-            marginLeft: '5%',
-            marginTop: '5%',
-          }}
-        >
-          <AsyncSelect
-            value={inputAddress.current}
-            isSearchable
-            placeholder={'Enter your Location'}
-            loadOptions={fetchOneMapSuggestions}
-            onChange={onChangeHandler}
-            components={{ NoOptions }}
-            styles={selectStyles}
-          />
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              marginTop: 5,
-            }}
-          >
-            <Button
-              onClick={onUseMyLocation}
-              marginRight={2}
-              colorScheme='teal'
-            >
-              <SearchIcon />{' '}
-              <span style={{ fontSize: '0.9rem' }}>Use My Location! </span>
-            </Button>
-            <Link
-              href={{
-                pathname: '/summary/[code]',
-                query: {
-                  code: encode.current,
-                },
-              }}
-              as={`/summary/${encode.current}`}
-              passHref
-            >
-              {loader ? (
-                <Button
-                  isLoading
-                  colorScheme='teal'
-                  variant='solid'
-                  loadingText='Loading...'
-                ></Button>
-              ) : (
-                <Button
-                  disabled={disable}
-                  rightIcon={<ArrowForwardIcon />}
-                  onClick={switchLoader}
-                  colorScheme='teal'
-                >
-                  <span style={{ fontSize: '0.9rem' }}>I&apos;m done!</span>
-                </Button>
-              )}
-            </Link>
-          </div>
-        </div>
-
         {/* Pop Up Box */}
         {showPopup && (
           <InfoBox
             content={popupContent}
-            homeMarker={homeMarker.current}
+            homeMarker={position}
             displayDirection={displayDirection}
             handleCloseInfoBox={() => setShowPopup(false)}
           />
@@ -255,13 +175,38 @@ export default function Geolocation({ userItems }) {
                   attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                   url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
                 />
-                <Marker
-                  draggable={false}
-                  position={[homeMarker.current.lat, homeMarker.current.lng]}
-                  animate={true}
-                  icon={markerHome}
-                  onClick={handleHomeMarkerClick}
-                />
+                {/* Multiselect+Buttons */}
+                <div
+                  style={{
+                    position: 'absolute',
+                    width: '90%',
+                    height: 'auto',
+                    top: 0,
+                    zIndex: 10000,
+                    justifyContent: 'center',
+                    left: { left_proportion: '50%' },
+                    marginLeft: '5%',
+                    marginTop: '5%',
+                  }}
+                >
+                  <AsyncSelect
+                    value={inputAddress.current}
+                    isSearchable
+                    placeholder={'Enter your Location'}
+                    loadOptions={fetchOneMapSuggestions}
+                    onChange={onChangeHandler}
+                    components={{ NoOptions }}
+                    styles={selectStyles}
+                  />
+                  <UtilityBar
+                    encode={encode}
+                    disable={disable}
+										setDisable={setDisable}
+                    loading={loading}
+                    setLoading={setLoading}
+                  />
+                </div>
+                <LocationMarker position={position} setPosition={setPosition} />
                 {nonBlueBinMarkers.map((marker, idx) => (
                   <Marker
                     key={`marker-${idx}`}

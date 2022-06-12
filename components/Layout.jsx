@@ -10,8 +10,8 @@ import {
   DrawerHeader,
   DrawerBody,
   DrawerCloseButton,
-  Flex,
   HStack,
+  Image,
   IconButton,
   Link,
   List,
@@ -73,25 +73,29 @@ const Layout = ({ children }) => {
         >
           <Container
             py={{
-              base: '3',
-              lg: '4',
+              base: '2',
+              lg: '3',
             }}
           >
-            <Flex justify='space-between'>
-              <HStack spacing='4'>
-                {isDesktop && (
-                  <ButtonGroup variant='ghost' spacing='1'>
-                    {userLinks.map((link) => (
-                      <Link key={link.name} href={`${basePath}/${link.path}`}>
-                        <Button>{link.name}</Button>
-                      </Link>
-                    ))}
-                  </ButtonGroup>
-                )}
-              </HStack>
+            <HStack spacing='8' justify='space-around'>
+              <Image
+                src='/unclesemakau.png'
+                alt='Uncle Semakau'
+                boxSize='50px'
+                objectFit='cover'
+              />
+              {isDesktop && (
+                <ButtonGroup variant='ghost' spacing='8'>
+                  {userLinks.map((link) => (
+                    <Link key={link.name} href={`${basePath}/${link.path}`}>
+                      <Button>{link.name}</Button>
+                    </Link>
+                  ))}
+                </ButtonGroup>
+              )}
               {isDesktop ? (
-                <HStack spacing='4'>
-                  <ButtonGroup variant='ghost' spacing='1'>
+                <HStack spacing='8' justify='space-between'>
+                  <ButtonGroup variant='ghost' spacing='3'>
                     <IconButton
                       icon={<FiSettings fontSize='1.25rem' />}
                       aria-label='Settings'
@@ -151,7 +155,7 @@ const Layout = ({ children }) => {
                   </Drawer>
                 </>
               )}
-            </Flex>
+            </HStack>
           </Container>
         </Box>
       </Box>
