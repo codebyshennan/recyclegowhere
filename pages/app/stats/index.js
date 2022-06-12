@@ -1,71 +1,76 @@
-import React from 'react'
-import Layout from '../../../components/Layout'
+import React from "react";
+import Layout from "../../../components/Layout";
 import {
   Text,
+  Center,
   Heading,
   Box,
   SimpleGrid,
   Stack,
   useBreakpointValue,
   useColorModeValue,
-} from '@chakra-ui/react'
-import StatCell from '../../../components/stat/StatCell'
+} from "@chakra-ui/react";
+import StatCell from "../../../components/stat/StatCell";
+import { StatMembers } from "../../../components/stat/StatMembers";
 
 const stats = [
   {
-    label: 'Total Subscribers',
-    value: '71,887',
-    delta: { value: '320', isUpwardsTrend: true },
+    label: "Total Subscribers",
+    value: "71,887",
+    delta: { value: "320", isUpwardsTrend: true },
   },
   {
-    label: 'Avg. Open Rate',
-    value: '56.87%',
-    delta: { value: '2.3%', isUpwardsTrend: true },
+    label: "Avg. Open Rate",
+    value: "56.87%",
+    delta: { value: "2.3%", isUpwardsTrend: true },
   },
   {
-    label: 'Avg. Click Rate',
-    value: '12.87%',
-    delta: { value: '0.1%', isUpwardsTrend: false },
+    label: "Avg. Click Rate",
+    value: "12.87%",
+    delta: { value: "0.1%", isUpwardsTrend: false },
   },
-]
+];
 
 const Stats = () => {
   return (
-    <Stack spacing={{ base: '8', lg: '6' }}>
+    <Stack spacing={{ base: "8", lg: "6" }} maxWidth={'3xl'}>
       <Stack
-        spacing='4'
-        direction={{ base: 'column', lg: 'row' }}
-        justify='space-between'
+        spacing="4"
+        direction={{ base: "column", lg: "row" }}
+        justify="space-between"
       >
-        <Stack spacing='1'>
+        <Stack spacing="1">
           <Heading
-            size={useBreakpointValue({ base: 'xs', lg: 'sm' })}
-            fontWeight='medium'
+            size={useBreakpointValue({ base: "xs", lg: "sm" })}
+            fontWeight="medium"
           >
             Statistics
           </Heading>
-          <Text color='muted'>All important metrics at a glance</Text>
+          <Text color="muted">All important metrics at a glance</Text>
         </Stack>
       </Stack>
-      <Stack spacing={{ base: '5', lg: '6' }}>
-        <SimpleGrid columns={{ base: 1, md: 3 }} gap='6'>
+      <Stack spacing={{ base: "5", lg: "6" }}>
+        <SimpleGrid columns={{ base: 1, md: 3 }} mx="20" gap="6"> 
           {stats.map((stat, id) => (
             <StatCell key={id} {...stat} />
           ))}
         </SimpleGrid>
+        <Center>
+          <StatMembers />
+        </Center>
       </Stack>
       <Box
-        minH='36'
-        bg='bg-surface'
-        boxShadow={useColorModeValue('sm', 'sm-dark')}
-        borderRadius='lg'
+        minH="36"
+        bg="bg-surface"
+        boxShadow={useColorModeValue("sm", "sm-dark")}
+        borderRadius="lg"
       />
     </Stack>
-  )
-}
+  );
+};
 
 Stats.getLayout = function getLayout(page) {
-  return <Layout>{page}</Layout>
-}
+  return <Layout>{page}</Layout>;
+};
 
-export default Stats
+export default Stats;
