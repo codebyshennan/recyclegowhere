@@ -6,13 +6,14 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
+import { useState } from "react";
 import React from "react";
 import { PaymentInformation } from "../../../../components/checkout/PaymentInformation";
 import { ShippingInformation } from "../../../../components/checkout/ShippingInformation";
 import { ShippingMethod } from "../../../../components/checkout/ShippingMethod";
 import { OrderSummary } from "../../../../components/checkout/OrderSummary";
 import Layout from "../../../../components/Layout";
-import DatePicker from 'react-date-picker';
+import Calendar from 'react-calendar';
 
 const Checkout = () => {
   const router = useRouter();
@@ -47,7 +48,7 @@ const Checkout = () => {
               <span>
                 <strong>Date of collection:</strong>
               </span>
-              <DatePicker onChange={setValue} value={value} />
+              <Calendar onChange={setValue} value={value} />
             </div>
           </Stack>
         </Box>
