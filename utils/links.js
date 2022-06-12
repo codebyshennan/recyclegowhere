@@ -31,11 +31,11 @@ const USER = [
     path: 'stats',
     icon: MdQueryStats,
   },
-  {
-    name: 'schedule',
-    path: 'schedule',
-    icon: GrSchedule,
-  },
+  // {
+  //   name: 'schedule',
+  //   path: 'schedule',
+  //   icon: GrSchedule,
+  // },
   {
     name: 'arrange',
     path: 'arrange',
