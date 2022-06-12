@@ -29,6 +29,7 @@ const UtilityBar = ({ encode, disable, setDisable, loading, setLoading, items })
     let encodethis = btoa(JSON.stringify(items))
     console.log(encodethis);
     setEncoded(encodethis);
+    console.log(JSON.parse(atob(encodethis)))
   };
 
   return (
