@@ -23,8 +23,7 @@ const Rewards = () => {
       <CardWithAvatar
         maxW="xl"
         avatarProps={{
-          src: "https://images.unsplash.com/photo-1485178575877-1a13bf489dfe?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDV8fHdvbWFufGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
-          name: "Esther Felix",
+          name: "Uncle Semakau",
         }}
         action={
           <Button size="sm" leftIcon={<HiPencilAlt />}>
@@ -34,15 +33,15 @@ const Rewards = () => {
       >
         <CardContent>
           <Heading size="lg" fontWeight="extrabold" letterSpacing="tight">
-            Esther Felix
+            Uncle Semakau
           </Heading>
           <Text color={useColorModeValue("gray.600", "gray.400")}>
-            Frontend Developer &amp; UI Designer
+            Recycling Enthusiast
           </Text>
           <UserInfo
-            location="Memphis, USA"
-            website="esther.com"
-            memberSince="Joined Sept. 2019"
+            location="Punggol"
+            website="27 kg^3 recycled"
+            memberSince="Joined Sept. 2021"
           />
         </CardContent>
       </CardWithAvatar>
