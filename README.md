@@ -1,5 +1,8 @@
 # RecycleGoWhere
 
+Demo: https://recyclegowhere-git-demo-wongsn.vercel.app/
+Prod: https://recyclegowhere.vercel.app/
+
 <p align="center">
   <img height="100px" src="./public/recyclegowhere.png" />
 </p>
